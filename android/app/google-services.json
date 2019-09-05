@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "664294187100",
+    "firebase_url": "https://physics-4eca0.firebaseio.com",
+    "project_id": "physics-4eca0",
+    "storage_bucket": "physics-4eca0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664294187100:android:5a2afe7d3b0da87f930699",
+        "android_client_info": {
+          "package_name": "takagi.physics_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664294187100-hbc6a8fd4vr797hq2pgvd2184892lbn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdJ6Ww5bIVwmVurr2dPvGkGRYqaua4WUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664294187100-hbc6a8fd4vr797hq2pgvd2184892lbn3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
