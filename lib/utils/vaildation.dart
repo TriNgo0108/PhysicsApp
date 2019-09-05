@@ -12,4 +12,8 @@ class Validation{
     }
     return null;
   }
+  static String validateName(String name){
+    if (name.isEmpty) return 'Name can\'t empty ';
+    return null;
+  }
 }

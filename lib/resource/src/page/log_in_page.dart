@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:physics_app/resource/src/blocs/log_in_bloc.dart';
+import 'package:physics_app/resource/src/blocs/register_bloc.dart';
 import 'package:physics_app/resource/src/page/register_page.dart';
 import 'package:physics_app/utils/fire_sign_in.dart';
 import 'package:physics_app/utils/screen_size.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,14 +17,17 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool _isShowPass = true;
-@override
+
+  @override
   void initState() {
     // TODO: implement initState
-  passController.addListener((){
-    LoginBloc.of(context).isEnableButton(emailController.text, passController.text);
-  });
+    passController.addListener(() {
+      LoginBloc.of(context)
+          .isEnableButton(emailController.text, passController.text);
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final heightScreen = ScreenSize.heightScreen(context);
@@ -34,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
       }).catchError((onError) {
         String error = _signIn.processError(onError);
         print(error);
+        loginBloc.addErrorPass(error);
       });
     }
 
@@ -92,29 +98,33 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.only(
                   left: widthScreen * 0.05, right: widthScreen * 0.05),
               child: StreamBuilder(
-                stream: loginBloc.showPassController,
-                builder: (context, snapshot) {
-                  return Stack(
-                    children: <Widget>[
-                      textFormFiled('Password', 'password', Icons.lock, snapshot.hasData?snapshot.data:true,
-                          passController, null),
-                      Positioned(
-                          top: heightScreen * 0.025,
-                          left: widthScreen * 0.75,
-                          child: GestureDetector(
-                            child: Text(
-                              _isShowPass ? 'Show' : 'Hide',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            onTap: () {
-                              _isShowPass = loginBloc.showPass(_isShowPass);
-                              print(_isShowPass);
-                            },
-                          ))
-                    ],
-                  );
-                }
-              ),
+                  stream: loginBloc.showPassController,
+                  builder: (context, snapshot) {
+                    return Stack(
+                      children: <Widget>[
+                        textFormFiled(
+                            'Password',
+                            'password',
+                            Icons.lock,
+                            snapshot.hasData ? snapshot.data : true,
+                            passController,
+                            snapshot.hasError ? snapshot.error : null),
+                        Positioned(
+                            top: heightScreen * 0.025,
+                            left: widthScreen * 0.75,
+                            child: GestureDetector(
+                              child: Text(
+                                _isShowPass ? 'Show' : 'Hide',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              onTap: () {
+                                _isShowPass = loginBloc.showPass(_isShowPass);
+                                print(_isShowPass);
+                              },
+                            ))
+                      ],
+                    );
+                  }),
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -155,7 +165,10 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => RegisterPage()));
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                          builder: (_)=>RegisterBloc(),
+                                            child: RegisterPage())));
                           },
                         text: 'Register here !',
                         style:
