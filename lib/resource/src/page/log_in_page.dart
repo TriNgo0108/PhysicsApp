@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
               height: heightScreen * 0.2,
             ),
             Padding(
-              padding: EdgeInsets.only(left: widthScreen * 0.05),
+              padding: EdgeInsets.only(left: widthScreen * 0.025,right: widthScreen*0.025),
               child: Center(
                 child: Stack(
                   children: <Widget>[
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                         top: heightScreen * 0.21,
                         child: Text(
                           'Do execrise any where, any time when you want',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 14),
                         ))
                   ],
                 ),

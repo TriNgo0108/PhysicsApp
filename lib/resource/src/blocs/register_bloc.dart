@@ -11,9 +11,9 @@ class RegisterBloc extends ChangeNotifier{
   final _nameController =  BehaviorSubject<String>();
   final _buttonController =  BehaviorSubject<bool>();
 
-  Stream<String> get mailController =>_mailController.stream.skip(2);
-  Stream<String> get passController =>_passController.stream.skip(2);
-  Stream<String> get nameController =>_nameController.stream.skip(2);
+  Stream<String> get mailController =>_mailController.stream.skip(1);
+  Stream<String> get passController =>_passController.stream.skip(1);
+  Stream<String> get nameController =>_nameController.stream.skip(1);
   Stream get buttonController => _buttonController.stream;
 
 
